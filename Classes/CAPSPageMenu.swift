@@ -961,29 +961,29 @@ open class CAPSPageMenu: UIViewController, UIScrollViewDelegate, UIGestureRecogn
     
     
     // MARK: - Remove/Add Page
-    func addPageAtIndex(_ index : Int) {
+        func addPageAtIndex(_ index : Int) {
         // Call didMoveToPage delegate function
         let currentController = controllerArray[index]
         delegate?.willMoveToPage?(currentController, index: index)
         
         let newVC = controllerArray[index]
-        
-        newVC.willMove(toParent: self)
+    
+        newVC.willMove(toParentViewController: self)
         
         newVC.view.frame = CGRect(x: self.view.frame.width * CGFloat(index), y: menuHeight, width: self.view.frame.width, height: self.view.frame.height - menuHeight)
         
-        self.addChild(newVC)
+        self.addChildViewController(newVC)
         self.controllerScrollView.addSubview(newVC.view)
-        newVC.didMove(toParent: self)
+        newVC.didMove(toParentViewController: self)
     }
     
     func removePageAtIndex(_ index : Int) {
         let oldVC = controllerArray[index]
         
-        oldVC.willMove(toParent: nil)
+        oldVC.willMove(toParentViewController: nil)
         
         oldVC.view.removeFromSuperview()
-        oldVC.removeFromParent()
+        oldVC.removeFromParentViewController()
     }
     
     
